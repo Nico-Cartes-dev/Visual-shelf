@@ -113,26 +113,26 @@ Visual-shelf/
 │   │   ├── Carta Gantt.xlsx
 │   │   ├── Matriz RACI.xlsx
 │   │   └── Plan de riesgo.xlsx
-│	  └── Documentos Administrativos/
-│		    └── Fase 1/
-│	       	├──	Evidencias Grupales/
-│         │ 	├──	1.4_APT122_FormativaFase1.docx
-│         │   ├── 1.5_GuiaEstudiante_Fase 1_Definicion Proyecto APT.docx
-│         │   ├── PLANILLA DE EVALUACIÓN FASE 1.xlsx
-│         │   └── Presentacion idea de proyecto.docx
-│        	└── Evidencias Individuales/
-│            	├──	Cartes_nicolas_1.2_APT122_DiarioReflexionFase1.pdf
-│             ├── Cartes_nicolas_1.3_APT122_AutoevaluacionFase1.docx
-│             ├── Luengo_david_1.1_APT122_AutoevaluacionCompetenciasFase1.pdf
-│             ├── Luengo_david_1.2_APT122_DiarioReflexionFase1.pdf
-│				      ├──	Luengo_david_1.3_APT122_AutoevaluacionFase1.docx
-│		      		├──	Saldias_Luis_1.1_APT122_AutoevaluacionCompetenciasFase1.pdf
-│			      	├──	Saldias_Luis_1.2_APT122_DiarioReflexionFase1.pdf
-│	      			├──	Saldias_Luis_1.3_APT122_AutoevaluacionFase1.docx
-│		      		├──	cartes_nicolas_1.1_APT122_AutoevaluacionCompetenciasFase1.pdf
-│		      		├──	flores_eric_1.1_APT122_AutoevaluacionCompetenciasFase1.pdf
-│				      ├──	flores_eric_1.2_APT122_DiarioReflexionFase1.docx
-│           	└──	flores_eric_1.3_APT122_AutoevaluacionFase1.docx         
+│   └── Documentos Administrativos/
+│        └── Fase 1/
+│            ├──	Evidencias Grupales/
+│            │    ├──	1.4_APT122_FormativaFase1.docx
+│            │    ├── 1.5_GuiaEstudiante_Fase 1_Definicion Proyecto APT.docx
+│            │    ├── PLANILLA DE EVALUACIÓN FASE 1.xlsx
+│            │    └── Presentacion idea de proyecto.docx
+│            └── Evidencias Individuales/
+│                  ├──	Cartes_nicolas_1.2_APT122_DiarioReflexionFase1.pdf
+│                  ├── Cartes_nicolas_1.3_APT122_AutoevaluacionFase1.docx
+│                  ├── Luengo_david_1.1_APT122_AutoevaluacionCompetenciasFase1.pdf
+│                  ├── Luengo_david_1.2_APT122_DiarioReflexionFase1.pdf
+│                  ├──	Luengo_david_1.3_APT122_AutoevaluacionFase1.docx
+│                  ├──	Saldias_Luis_1.1_APT122_AutoevaluacionCompetenciasFase1.pdf
+│                  ├──	Saldias_Luis_1.2_APT122_DiarioReflexionFase1.pdf
+│                  ├──	Saldias_Luis_1.3_APT122_AutoevaluacionFase1.docx
+│                  ├──	cartes_nicolas_1.1_APT122_AutoevaluacionCompetenciasFase1.pdf
+│                  ├──	flores_eric_1.1_APT122_AutoevaluacionCompetenciasFase1.pdf
+│                  ├──	flores_eric_1.2_APT122_DiarioReflexionFase1.docx
+│                  └──	flores_eric_1.3_APT122_AutoevaluacionFase1.docx         
 └── Fase 2/                               
     ├── 2.4_GuiaEstudiante_Fase 2_DesarrolloProyecto APT.docx
     ├── 2.4_GuiaEstudiante_Fase2_DesarrolloProyectoAPT(español).docx
