@@ -104,35 +104,51 @@ Visual-shelf/
 ├── Fase 1/                               
 │   ├── Anexos/
 │   │   ├── Diseño/
+│   │   │   ├── Diagrama de arquitectura/
+│   │   │   │    ├── Arquitectura con colab.png
+│   │   │   │    └── Arquitectura con local.png     
+│   │   │   ├── Diagramas particulares por cada C.U_/
+│   │   │   │    └── (cada caso de uso esta dentro)casos_de_uso_walmart_capstone.drawio
+│   │   │   ├── Mockups/
+│   │   │   │    ├── Mockup-01.jpg
+│   │   │   │    ├── Mockup-02.jpg
+│   │   │   │    ├── Mockup-03.jpg
+│   │   │   │    └── Mockup-04.jpg
 │   │   │   ├── Diagrama general de Caso de Uso.xml
 │   │   │   ├── Lista de C.U. _ Historias de Usuario, Epicas, Sprint, etc.xlsx
 │   │   │   ├── Lista de requerimientos funcionales y no funcionales.xlsx
-│   │   │   └── Plantillas de C.U. por cada C.U_.docx
+│   │   │   └── Plantillas de C.U. por cada C.U_
 │   │   ├── Gestion/
-│   │       ├── Archivo README.docx
-│   │       ├── Carta Gantt.xlsx
-│   │       ├── Matriz RACI.xlsx
-│   │       └── Plan de riesgo.xlsx
-│	└── Documentos Administrativos/
-│		└── Fase 1/
-│	       	├──	Evidencias Grupales/
-│           │ 	├──	1.4_APT122_FormativaFase1.docx
-│           │   ├── 1.5_GuiaEstudiante_Fase 1_Definicion Proyecto APT.docx
-│           │   ├── PLANILLA DE EVALUACIÓN FASE 1.xlsx
-│           │   └── Presentacion idea de proyecto.docx
-│        	└── Evidencias Individuales/
-│            	├──	Cartes_nicolas_1.2_APT122_DiarioReflexionFase1.pdf
-│               ├── Cartes_nicolas_1.3_APT122_AutoevaluacionFase1.docx
-│               ├── Luengo_david_1.1_APT122_AutoevaluacionCompetenciasFase1.pdf
-│               ├── Luengo_david_1.2_APT122_DiarioReflexionFase1.pdf
-│				├──	Luengo_david_1.3_APT122_AutoevaluacionFase1.docx
-│				├──	Saldias_Luis_1.1_APT122_AutoevaluacionCompetenciasFase1.pdf
-│				├──	Saldias_Luis_1.2_APT122_DiarioReflexionFase1.pdf
-│				├──	Saldias_Luis_1.3_APT122_AutoevaluacionFase1.docx
-│				├──	cartes_nicolas_1.1_APT122_AutoevaluacionCompetenciasFase1.pdf
-│				├──	flores_eric_1.1_APT122_AutoevaluacionCompetenciasFase1.pdf
-│				├──	flores_eric_1.2_APT122_DiarioReflexionFase1.docx
-│     			└──	flores_eric_1.3_APT122_AutoevaluacionFase1.docx         
+│   │   │   └── Actas de reunion/
+│   │   │   │    └── Acta_Reunion_1_Walmart_Chile.docx
+│   │   │   ├── Archivo README.docx
+│   │   │   ├── Carta Gantt.xlsx
+│   │   │   ├── Matriz RACI.xlsx
+│   │   │   └── Plan de riesgo.xlsx
+│   │   ├── Archivo README.docx
+│   │   ├── Carta Gantt.xlsx
+│   │   ├── Matriz RACI.xlsx
+│   │   └── Plan de riesgo.xlsx
+│   └── Documentos Administrativos/
+│        └── Fase 1/
+│            ├── Evidencias Grupales/
+│            │    ├── 1.4_APT122_FormativaFase1.docx
+│            │    ├── 1.5_GuiaEstudiante_Fase 1_Definicion Proyecto APT.docx
+│            │    ├── PLANILLA DE EVALUACIÓN FASE 1.xlsx
+│            │    └── Presentacion idea de proyecto.docx
+│            └── Evidencias Individuales/
+│                  ├── Cartes_nicolas_1.2_APT122_DiarioReflexionFase1.pdf
+│                  ├── Cartes_nicolas_1.3_APT122_AutoevaluacionFase1.docx
+│                  ├── Luengo_david_1.1_APT122_AutoevaluacionCompetenciasFase1.pdf
+│                  ├── Luengo_david_1.2_APT122_DiarioReflexionFase1.pdf
+│                  ├── Luengo_david_1.3_APT122_AutoevaluacionFase1.docx
+│                  ├── Saldias_Luis_1.1_APT122_AutoevaluacionCompetenciasFase1.pdf
+│                  ├── Saldias_Luis_1.2_APT122_DiarioReflexionFase1.pdf
+│                  ├── Saldias_Luis_1.3_APT122_AutoevaluacionFase1.docx
+│                  ├── cartes_nicolas_1.1_APT122_AutoevaluacionCompetenciasFase1.pdf
+│                  ├── flores_eric_1.1_APT122_AutoevaluacionCompetenciasFase1.pdf
+│                  ├── flores_eric_1.2_APT122_DiarioReflexionFase1.docx
+│                  └── flores_eric_1.3_APT122_AutoevaluacionFase1.docx         
 └── Fase 2/                               
     ├── 2.4_GuiaEstudiante_Fase 2_DesarrolloProyecto APT.docx
     ├── 2.4_GuiaEstudiante_Fase2_DesarrolloProyectoAPT(español).docx
