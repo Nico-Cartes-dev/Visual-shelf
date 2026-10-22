@@ -158,7 +158,13 @@ Visual-shelf/
     ├── Saldias_Luis_2.1_APT122_DiarioReflexionFase2.docx
     ├── Informe_APT_Fase2_tres_secciones_modificado.docx
     └── modelos/
-        └── deteccion_huecos_gondolas_V3.1.ipynb
+        ├── Luis Saldias
+        │   └── deteccion_huecos_gondolas_V3.1.ipynb
+        └── Nicolas Cartes
+            ├── best.pt
+            └── shelf_monitor_uso_v3.ipynb
+
+
 ```
 
 ### Instrucciones para Instalar Dependencias, Configurar y Ejecutar la Aplicacion
