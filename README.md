@@ -104,11 +104,27 @@ Visual-shelf/
 ├── Fase 1/                               
 │   ├── Anexos/
 │   │   ├── Diseño/
+│   │   │   ├── Diagrama de arquitectura/
+│   │   │   │    ├── Arquitectura con colab.png
+│   │   │   │    └── Arquitectura con local.png     
+│   │   │   ├── Diagramas particulares por cada C.U_/
+│   │   │   │    └── (cada caso de uso esta dentro)casos_de_uso_walmart_capstone.drawio
+│   │   │   ├── Mockups/
+│   │   │   │    ├── Mockup-01.jpg
+│   │   │   │    ├── Mockup-02.jpg
+│   │   │   │    ├── Mockup-03.jpg
+│   │   │   │    └── Mockup-04.jpg
 │   │   │   ├── Diagrama general de Caso de Uso.xml
 │   │   │   ├── Lista de C.U. _ Historias de Usuario, Epicas, Sprint, etc.xlsx
 │   │   │   ├── Lista de requerimientos funcionales y no funcionales.xlsx
-│   │   │   └── Plantillas de C.U. por cada C.U_.docx
+│   │   │   └── Plantillas de C.U. por cada C.U_
 │   │   ├── Gestion/
+│   │   │   └── Actas de reunion/
+│   │   │   │    └── Acta_Reunion_1_Walmart_Chile.docx
+│   │   │   ├── Archivo README.docx
+│   │   │   ├── Carta Gantt.xlsx
+│   │   │   ├── Matriz RACI.xlsx
+│   │   │   └── Plan de riesgo.xlsx
 │   │   ├── Archivo README.docx
 │   │   ├── Carta Gantt.xlsx
 │   │   ├── Matriz RACI.xlsx
