@@ -1,0 +1,5 @@
+ultralytics>=8.1
+opencv-python-headless
+scipy
+numpy
+pillow

@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VisualShelf · Análisis de góndolas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230053E2'/%3E%3Cpath d='M8 12V8h4M20 8h4v4M24 20v4h-4M12 24H8v-4' stroke='%23FFC220' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 1 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24"><path d="M4 9l1.5-5h13L20 9M4 9h16v2a3 3 0 0 1-5.3 1.9A3 3 0 0 1 12 14a3 3 0 0 1-2.7-1.1A3 3 0 0 1 4 11zM5 13v7h14v-7M10 20v-4h4v4"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17.5v.01"/></symbol>
+    <symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6M12 2v3"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 15V4M7 9l5-5 5 5M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor" stroke="none"/><path d="m7.5 12.5 3 3 6-6.5" style="stroke: var(--visto, #fff)" stroke-width="2.4"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.01"/></symbol>
+    <symbol id="i-gauge" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="M12 8v5M12 16v.01"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+    <symbol id="i-dots" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-logo" viewBox="0 0 40 40"><path d="M5 13V6a1 1 0 0 1 1-1h7M27 5h7a1 1 0 0 1 1 1v7M35 27v7a1 1 0 0 1-1 1h-7M13 35H6a1 1 0 0 1-1-1v-7"/><path d="M11 14h18M11 20h18M11 26h18" stroke-width="2.2"/></symbol>
+  </defs>
+</svg>
+
+<div class="app">
+  <!-- ============ BARRA LATERAL ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="marca">
+      <svg class="marca-logo"><use href="#i-logo"/></svg>
+      <div>
+        <div class="marca-nombre">VisualShelf</div>
+        <div class="marca-sub">Inteligencia visual para góndolas</div>
+      </div>
+    </div>
+    <div class="marca-badge">Operaciones de tienda</div>
+    <nav class="nav">
+      <button class="nav-item" data-vista="resumen"><svg><use href="#i-home"/></svg>Resumen</button>
+      <button class="nav-item activo" data-vista="analizar"><svg><use href="#i-sliders"/></svg>Analizar góndolas</button>
+      <button class="nav-item" data-vista="historial"><svg><use href="#i-clock"/></svg>Historial</button>
+      <button class="nav-item" data-vista="alertas"><svg><use href="#i-bell"/></svg>Alertas<span class="nav-cuenta" id="nav-alertas" hidden>0</span></button>
+      <button class="nav-item" data-vista="config"><svg><use href="#i-gear"/></svg>Configuración</button>
+    </nav>
+    <div class="sidebar-pie" id="estado-modelo">Conectando con el modelo…</div>
+  </aside>
+  <div class="velo" id="velo"></div>
+
+  <div class="contenido">
+    <!-- ============ BARRA SUPERIOR ============ -->
+    <header class="topbar">
+      <button class="icono-btn menu-btn" id="menu-btn" aria-label="Menú"><svg><use href="#i-menu"/></svg></button>
+      <nav class="miga" aria-label="Ruta">
+        <svg><use href="#i-home"/></svg><span>Operaciones</span><span class="sep">/</span><strong id="miga-actual">Análisis de góndolas</strong>
+      </nav>
+      <div class="top-acciones">
+        <label class="selector">
+          <svg><use href="#i-store"/></svg><span class="selector-et">Tienda:</span>
+          <select id="tienda"></select>
+          <svg class="chev"><use href="#i-chevron"/></svg>
+        </label>
+        <label class="selector">
+          <svg><use href="#i-calendar"/></svg>
+          <span id="fecha-texto"></span>
+          <input type="date" id="fecha" aria-label="Fecha de la revisión">
+          <svg class="chev"><use href="#i-chevron"/></svg>
+        </label>
+        <button class="icono-btn campana" id="campana" aria-label="Alertas"><svg><use href="#i-bell"/></svg><span class="punto" id="punto" hidden></span></button>
+        <div class="usuario">
+          <button class="avatar" id="avatar" aria-label="Usuario">OP</button>
+          <svg class="chev"><use href="#i-chevron"/></svg>
+          <div class="menu-flotante" id="menu-usuario" hidden>
+            <div class="menu-titulo">Operaciones de tienda</div>
+            <button data-vista="config"><svg><use href="#i-gear"/></svg>Configuración</button>
+            <button id="borrar-historial"><svg><use href="#i-trash"/></svg>Borrar historial</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ============ VISTA: ANALIZAR GÓNDOLAS ============ -->
+      <section class="vista activa" id="vista-analizar">
+        <div class="encabezado">
+          <h1>Análisis de góndolas</h1>
+          <p>Analiza fotografías de góndolas, detecta productos, estima la ocupación y define si es necesario reabastecer.</p>
+        </div>
+
+        <div class="kpis">
+          <div class="kpi"><div class="kpi-ico azul"><svg><use href="#i-camera"/></svg></div><div><div class="kpi-et">Fotos analizadas</div><div class="kpi-val" id="k-fotos">0</div></div></div>
+          <div class="kpi"><div class="kpi-ico verde"><svg><use href="#i-layers"/></svg></div><div><div class="kpi-et">Ocupación estimada</div><div class="kpi-val" id="k-ocup">—</div></div></div>
+          <div class="kpi"><div class="kpi-ico rojo"><svg><use href="#i-alert"/></svg></div><div><div class="kpi-et">Reabastecer</div><div class="kpi-val" id="k-reab">0</div></div></div>
+          <div class="kpi"><div class="kpi-ico lila"><svg><use href="#i-timer"/></svg></div><div><div class="kpi-et">Tiempo de análisis</div><div class="kpi-val" id="k-tiempo">—</div></div></div>
+        </div>
+
+        <div class="grilla-trabajo">
+          <!-- Carga -->
+          <div class="tarjeta carga">
+            <h2>Cargar fotografías</h2>
+            <label class="zona-drop" id="zona-drop">
+              <input type="file" id="archivos" accept="image/jpeg,image/png,image/webp,image/bmp" multiple hidden>
+              <svg class="zona-ico"><use href="#i-image"/></svg>
+              <strong>Arrastra y suelta fotos aquí</strong>
+              <span>o selecciona archivos desde tu computadora</span>
+              <span class="btn btn-borde"><svg><use href="#i-upload"/></svg>Subir fotos</span>
+            </label>
+            <p class="formatos">Formatos: JPG, JPEG, PNG (máx. <span id="max-fotos">30</span>)</p>
+            <div class="seleccion" id="seleccion" hidden></div>
+
+            <details class="avanzada" open>
+              <summary><svg><use href="#i-sliders"/></svg>Configuración avanzada<svg class="chev"><use href="#i-chevron"/></svg></summary>
+              <div class="campo">
+                <label for="umbral">Umbral de alerta: stock bajo (%)<span class="ayuda" data-ayuda="Si el stock estimado de una foto queda bajo este porcentaje, se marca REABASTECER."><svg><use href="#i-info"/></svg></span></label>
+                <input type="number" id="umbral" min="5" max="90" step="1" value="30">
+              </div>
+              <div class="campo">
+                <label for="confianza">Confianza mínima del detector<span class="ayuda" data-ayuda="Más baja: detecta más productos, pero también más errores. 0.35 es el valor calibrado."><svg><use href="#i-info"/></svg></span></label>
+                <input type="number" id="confianza" min="0.05" max="0.95" step="0.05" value="0.35">
+              </div>
+            </details>
+
+            <button class="btn btn-primario btn-ancho" id="analizar" disabled><svg><use href="#i-play"/></svg><span>Analizar imágenes</span></button>
+            <div class="progreso" id="progreso" hidden><div class="progreso-barra" id="progreso-barra"></div></div>
+          </div>
+
+          <!-- Visor + resultados -->
+          <div class="tarjeta visor">
+            <div class="visor-barra">
+              <div class="paginador">
+                <button class="icono-btn chico" id="anterior" aria-label="Imagen anterior"><svg><use href="#i-left"/></svg></button>
+                <span id="paginas">Imagen 0 de 0</span>
+                <button class="icono-btn chico" id="siguiente" aria-label="Imagen siguiente"><svg><use href="#i-right"/></svg></button>
+              </div>
+              <div class="segmentado" role="tablist">
+                <button class="seg activo" id="ver-det"><svg><use href="#i-box"/></svg>Detecciones</button>
+                <button class="seg" id="ver-orig"><svg><use href="#i-image"/></svg>Original</button>
+              </div>
+              <div class="zoom">
+                <svg><use href="#i-search"/></svg>
+                <select id="zoom" aria-label="Zoom">
+                  <option value="1">Zoom</option><option value="1.5">150 %</option><option value="2">200 %</option><option value="3">300 %</option>
+                </select>
+              </div>
+              <label class="interruptor">
+                <input type="checkbox" id="mostrar-det" checked><span class="riel"></span>Mostrar detecciones
+              </label>
+            </div>
+
+            <div class="visor-cuerpo">
+              <div class="lienzo" id="lienzo">
+                <div class="vacio" id="vacio">
+                  <svg><use href="#i-image"/></svg>
+                  <strong>Aún no hay imágenes analizadas</strong>
+                  <span>Sube fotos de góndolas y presiona “Analizar imágenes”.</span>
+                </div>
+                <div class="marco" id="marco" hidden>
+                  <span class="insignia" id="insignia"></span>
+                  <img id="foto" alt="Góndola analizada">
+                </div>
+              </div>
+
+              <aside class="resultados">
+                <h3>Resultados de la imagen</h3>
+                <div class="medidor-fila">
+                  <div class="medidor">
+                    <svg viewBox="0 0 120 120"><circle class="m-fondo" cx="60" cy="60" r="50"/><circle class="m-valor" id="m-valor" cx="60" cy="60" r="50"/></svg>
+                    <div class="m-texto"><strong id="m-pct">—</strong><span>Ocupación<br>estimada</span></div>
+                  </div>
+                  <div class="medidor-info">
+                    <span class="chip" id="chip-estado">Sin analizar</span>
+                    <div class="dato"><svg><use href="#i-gauge"/></svg><span>Umbral de alerta</span><strong id="r-umbral">—</strong></div>
+                    <div class="dato"><svg><use href="#i-shield"/></svg><span>Confianza mínima</span><strong id="r-conf">—</strong></div>
+                  </div>
+                </div>
+                <div class="metricas">
+                  <div><strong id="r-prod">—</strong><span>Productos</span></div>
+                  <div><strong id="r-huecos">—</strong><span>Huecos</span></div>
+                  <div><strong id="r-filas">—</strong><span>Filas</span></div>
+                </div>
+                <div class="motivos" id="r-motivos" hidden></div>
+                <div class="archivo">
+                  <svg><use href="#i-image"/></svg>
+                  <div><strong id="r-nombre">—</strong><span id="r-peso"></span></div>
+                  <button class="icono-btn chico" id="abrir" aria-label="Abrir imagen en otra pestaña"><svg><use href="#i-external"/></svg></button>
+                </div>
+                <button class="btn btn-borde btn-ancho" id="csv" disabled><svg><use href="#i-download"/></svg>Descargar CSV</button>
+              </aside>
+            </div>
+          </div>
+        </div>
+
+        <div class="tarjeta detalle">
+          <h2 class="titulo-ico"><svg><use href="#i-list"/></svg>Detalle de análisis</h2>
+          <div class="tabla-envoltura">
+            <table class="tabla">
+              <thead><tr><th>Fotografía</th><th>Ocupación</th><th>Estado</th><th>Fecha</th><th class="der">Acciones</th></tr></thead>
+              <tbody id="tabla-lote"><tr class="fila-vacia"><td colspan="5">Los resultados aparecerán aquí.</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ VISTA: RESUMEN ============ -->
+      <section class="vista" id="vista-resumen">
+        <div class="encabezado"><h1>Resumen</h1><p>Indicadores de todas las fotos analizadas en este navegador, por tienda.</p></div>
+        <div class="kpis" id="resumen-kpis"></div>
+        <div class="tarjeta detalle">
+          <h2 class="titulo-ico"><svg><use href="#i-store"/></svg>Por tienda</h2>
+          <div class="tabla-envoltura"><table class="tabla"><thead><tr><th>Tienda</th><th>Fotos</th><th>Ocupación media</th><th>Reabastecer</th><th>Revisión manual</th><th>Última revisión</th></tr></thead><tbody id="tabla-tiendas"></tbody></table></div>
+        </div>
+      </section>
+
+      <!-- ============ VISTA: HISTORIAL ============ -->
+      <section class="vista" id="vista-historial">
+        <div class="encabezado"><h1>Historial</h1><p>Todas las fotos analizadas en este navegador. Filtra por la tienda y fecha seleccionadas arriba.</p></div>
+        <div class="tarjeta detalle">
+          <div class="detalle-cab">
+            <h2 class="titulo-ico"><svg><use href="#i-clock"/></svg>Análisis anteriores</h2>
+            <label class="interruptor"><input type="checkbox" id="filtrar-hist"><span class="riel"></span>Solo tienda y fecha seleccionadas</label>
+            <button class="btn btn-borde" id="csv-hist"><svg><use href="#i-download"/></svg>Descargar CSV</button>
+          </div>
+          <div class="tabla-envoltura"><table class="tabla"><thead><tr><th>Fotografía</th><th>Tienda</th><th>Ocupación</th><th>Estado</th><th>Fecha</th><th class="der">Acciones</th></tr></thead><tbody id="tabla-hist"></tbody></table></div>
+        </div>
+      </section>
+
+      <!-- ============ VISTA: ALERTAS ============ -->
+      <section class="vista" id="vista-alertas">
+        <div class="encabezado"><h1>Alertas</h1><p>Góndolas que necesitan reabastecimiento o una revisión manual.</p></div>
+        <div class="alertas" id="lista-alertas"></div>
+      </section>
+
+      <!-- ============ VISTA: CONFIGURACIÓN ============ -->
+      <section class="vista" id="vista-config">
+        <div class="encabezado"><h1>Configuración</h1><p>Valores que se usan al analizar. Se guardan en este navegador.</p></div>
+        <div class="config-grilla">
+          <div class="tarjeta">
+            <h2>Análisis</h2>
+            <div class="campo"><label for="c-umbral">Umbral de alerta: stock bajo (%)</label><input type="number" id="c-umbral" min="5" max="90" step="1"></div>
+            <div class="campo"><label for="c-conf">Confianza mínima del detector</label><input type="number" id="c-conf" min="0.05" max="0.95" step="0.05"></div>
+            <div class="campo"><label for="c-tiendas">Tiendas (una por línea)</label><textarea id="c-tiendas" rows="4"></textarea></div>
+            <div class="fila-botones"><button class="btn btn-primario" id="c-guardar">Guardar</button><button class="btn btn-borde" id="c-restaurar">Restaurar valores calibrados</button></div>
+          </div>
+          <div class="tarjeta">
+            <h2>Modelo</h2>
+            <dl class="ficha" id="ficha-modelo"></dl>
+            <h2 class="sub">Cómo leer las imágenes</h2>
+            <ul class="leyenda">
+              <li><span class="muestra caja"></span>Productos detectados (un color por fila)</li>
+              <li><span class="muestra hueco"></span>Hueco: espacio vacío entre productos</li>
+              <li><span class="muestra dudoso"></span>Espacio con aspecto de producto no detectado (no cuenta como hueco)</li>
+              <li><span class="muestra linea"></span>Repisa completa vacía (inferida)</li>
+            </ul>
+            <p class="nota">Para mejores resultados: foto frontal o con poco ángulo, 2–4 m de góndola, buena luz. Frutas y verduras a granel quedan fuera de alcance.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<div class="menu-flotante menu-fila" id="menu-fila" hidden>
+  <button data-accion="ver"><svg><use href="#i-eye"/></svg>Ver en el visor</button>
+  <button data-accion="abrir"><svg><use href="#i-external"/></svg>Abrir imagen</button>
+  <button data-accion="eliminar" class="peligro"><svg><use href="#i-trash"/></svg>Eliminar</button>
+</div>
+<div class="aviso" id="aviso" role="status" hidden></div>
+<script src="app.js"></script>
+</body>
+</html>
