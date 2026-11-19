@@ -366,3 +366,8 @@ main { padding: 26px 24px 40px; }
   .medidor { align-self: center; }
   .lienzo { min-height: 260px; }
 }
+
+[hidden] { display: none !important; }
+.acceso { min-height:100vh; display:grid; place-items:center; padding:24px; background:var(--fondo); }
+.acceso-tarjeta { width:min(100%,440px); padding:32px; }
+#acceso-mensaje { color:var(--marino); min-height:24px; overflow-wrap:anywhere; }

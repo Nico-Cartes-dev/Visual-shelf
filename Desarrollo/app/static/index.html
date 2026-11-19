@@ -47,7 +47,21 @@
   </defs>
 </svg>
 
-<div class="app">
+<section id="acceso" class="acceso">
+  <div class="tarjeta acceso-tarjeta">
+    <h1>VisualShelf</h1><p>Ingresa para consultar y analizar tus tiendas.</p>
+    <form id="login">
+      <div class="campo"><label for="email">Correo</label><input id="email" type="email" autocomplete="username" required></div>
+      <div class="campo"><label for="password">Contraseña</label><input id="password" type="password" autocomplete="current-password" required></div>
+      <button class="btn btn-primario" type="submit">Ingresar</button>
+      <button class="btn btn-borde" id="recuperar" type="button">Recuperar acceso</button>
+    </form>
+    <form id="nueva-clave" hidden><div class="campo"><label for="clave-nueva">Nueva contraseña</label><input id="clave-nueva" type="password" minlength="12" autocomplete="new-password" required></div><button class="btn btn-primario">Guardar contraseña</button></form>
+    <p id="acceso-mensaje" role="status" aria-live="polite"></p>
+    <p>El acceso lo habilita el administrador de tu tienda.</p>
+  </div>
+</section>
+<div class="app" hidden>
   <!-- ============ BARRA LATERAL ============ -->
   <aside class="sidebar" id="sidebar">
     <div class="marca">
@@ -79,7 +93,7 @@
       <div class="top-acciones">
         <label class="selector">
           <svg><use href="#i-store"/></svg><span class="selector-et">Tienda:</span>
-          <select id="tienda"></select>
+          <select id="tienda" aria-label="Tienda"></select>
           <svg class="chev"><use href="#i-chevron"/></svg>
         </label>
         <label class="selector">
@@ -93,9 +107,9 @@
           <button class="avatar" id="avatar" aria-label="Usuario">OP</button>
           <svg class="chev"><use href="#i-chevron"/></svg>
           <div class="menu-flotante" id="menu-usuario" hidden>
-            <div class="menu-titulo">Operaciones de tienda</div>
+            <div class="menu-titulo" id="usuario-email">Mi cuenta</div>
             <button data-vista="config"><svg><use href="#i-gear"/></svg>Configuración</button>
-            <button id="borrar-historial"><svg><use href="#i-trash"/></svg>Borrar historial</button>
+            <button id="salir">Cerrar sesion</button>
           </div>
         </div>
       </div>
@@ -109,6 +123,7 @@
           <p>Analiza fotografías de góndolas, detecta productos, estima la ocupación y define si es necesario reabastecer.</p>
         </div>
 
+        <div class="campo"><label for="gondola">Codigo de gondola (opcional)</label><input id="gondola" maxlength="100" placeholder="Ej.: pasillo-3-A"></div>
         <div class="kpis">
           <div class="kpi"><div class="kpi-ico azul"><svg><use href="#i-camera"/></svg></div><div><div class="kpi-et">Fotos analizadas</div><div class="kpi-val" id="k-fotos">0</div></div></div>
           <div class="kpi"><div class="kpi-ico verde"><svg><use href="#i-layers"/></svg></div><div><div class="kpi-et">Ocupación estimada</div><div class="kpi-val" id="k-ocup">—</div></div></div>
@@ -225,7 +240,7 @@
 
       <!-- ============ VISTA: RESUMEN ============ -->
       <section class="vista" id="vista-resumen">
-        <div class="encabezado"><h1>Resumen</h1><p>Indicadores de todas las fotos analizadas en este navegador, por tienda.</p></div>
+        <div class="encabezado"><h1>Resumen</h1><p>Indicadores de todas las fotos analizadas en tus tiendas autorizadas.</p></div>
         <div class="kpis" id="resumen-kpis"></div>
         <div class="tarjeta detalle">
           <h2 class="titulo-ico"><svg><use href="#i-store"/></svg>Por tienda</h2>
@@ -235,21 +250,21 @@
 
       <!-- ============ VISTA: HISTORIAL ============ -->
       <section class="vista" id="vista-historial">
-        <div class="encabezado"><h1>Historial</h1><p>Todas las fotos analizadas en este navegador. Filtra por la tienda y fecha seleccionadas arriba.</p></div>
+        <div class="encabezado"><h1>Historial</h1><p>Historial compartido de tus tiendas autorizadas. Filtra por la tienda y fecha seleccionadas arriba.</p></div>
         <div class="tarjeta detalle">
           <div class="detalle-cab">
             <h2 class="titulo-ico"><svg><use href="#i-clock"/></svg>Análisis anteriores</h2>
             <label class="interruptor"><input type="checkbox" id="filtrar-hist"><span class="riel"></span>Solo tienda y fecha seleccionadas</label>
-            <button class="btn btn-borde" id="csv-hist"><svg><use href="#i-download"/></svg>Descargar CSV</button>
+            <button class="btn btn-borde" id="actualizar-central">Actualizar</button><button class="btn btn-borde" id="importar-local">Importar historial local</button><button class="btn btn-borde" id="csv-hist"><svg><use href="#i-download"/></svg>Descargar pagina CSV</button>
           </div>
-          <div class="tabla-envoltura"><table class="tabla"><thead><tr><th>Fotografía</th><th>Tienda</th><th>Ocupación</th><th>Estado</th><th>Fecha</th><th class="der">Acciones</th></tr></thead><tbody id="tabla-hist"></tbody></table></div>
+          <div class="tabla-envoltura"><table class="tabla"><thead><tr><th>Fotografía</th><th>Tienda</th><th>Ocupación</th><th>Estado</th><th>Fecha</th><th class="der">Acciones</th></tr></thead><tbody id="tabla-hist"></tbody></table></div><button id="hist-mas" class="btn btn-borde" hidden>Cargar mas</button>
         </div>
       </section>
 
       <!-- ============ VISTA: ALERTAS ============ -->
       <section class="vista" id="vista-alertas">
         <div class="encabezado"><h1>Alertas</h1><p>Góndolas que necesitan reabastecimiento o una revisión manual.</p></div>
-        <div class="alertas" id="lista-alertas"></div>
+        <div class="alertas" id="lista-alertas"></div><button id="alertas-mas" class="btn btn-borde" hidden>Cargar mas alertas</button>
       </section>
 
       <!-- ============ VISTA: CONFIGURACIÓN ============ -->
@@ -260,7 +275,7 @@
             <h2>Análisis</h2>
             <div class="campo"><label for="c-umbral">Umbral de alerta: stock bajo (%)</label><input type="number" id="c-umbral" min="5" max="90" step="1"></div>
             <div class="campo"><label for="c-conf">Confianza mínima del detector</label><input type="number" id="c-conf" min="0.05" max="0.95" step="0.05"></div>
-            <div class="campo"><label for="c-tiendas">Tiendas (una por línea)</label><textarea id="c-tiendas" rows="4"></textarea></div>
+            <div class="campo"><label for="c-tiendas">Tiendas asignadas por el administrador</label><textarea id="c-tiendas" rows="4" readonly></textarea></div>
             <div class="fila-botones"><button class="btn btn-primario" id="c-guardar">Guardar</button><button class="btn btn-borde" id="c-restaurar">Restaurar valores calibrados</button></div>
           </div>
           <div class="tarjeta">
@@ -287,6 +302,8 @@
   <button data-accion="eliminar" class="peligro"><svg><use href="#i-trash"/></svg>Eliminar</button>
 </div>
 <div class="aviso" id="aviso" role="status" hidden></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.js"></script>
+<script src="central.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
