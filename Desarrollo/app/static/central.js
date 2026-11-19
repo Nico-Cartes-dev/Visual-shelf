@@ -84,6 +84,8 @@ async function activarSesion(session) {
   }
   if (recuperando) {
     panel.hidden = false;
+    document.querySelector("#acceso-titulo").textContent = "Crea tu contraseña";
+    document.querySelector("#acceso-descripcion").textContent = "Define una contraseña para acceder a tu espacio de trabajo.";
     document.querySelector("#login").hidden = true;
     document.querySelector("#nueva-clave").hidden = false;
     return;
@@ -101,6 +103,13 @@ async function activarSesion(session) {
 
 document.addEventListener("DOMContentLoaded", async () => {
   const mensaje = document.querySelector("#acceso-mensaje");
+  document.querySelector("#ver-password").addEventListener("click", e => {
+    const campo = document.querySelector("#password");
+    const visible = campo.type === "password";
+    campo.type = visible ? "text" : "password";
+    e.currentTarget.setAttribute("aria-pressed", String(visible));
+    e.currentTarget.setAttribute("aria-label", visible ? "Ocultar contraseña" : "Mostrar contraseña");
+  });
   for (const id of ["#login", "#nueva-clave"])
     document.querySelector(id).addEventListener("submit", e => e.preventDefault());
   recuperando = ["recovery", "invite"].includes(new URLSearchParams(location.hash.slice(1)).get("type"));
@@ -112,6 +121,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     clienteAuth = window.supabase.createClient(conf.url, conf.key);
     document.querySelector("#login").addEventListener("submit", async e => {
       e.preventDefault(); mensaje.textContent = "Ingresando…";
+      const boton = document.querySelector("#ingresar");
+      boton.disabled = true;
+      boton.setAttribute("aria-busy", "true");
+      boton.querySelector("span").textContent = "Ingresando…";
       try {
         const { data, error } = await clienteAuth.auth.signInWithPassword({ email: document.querySelector("#email").value,
           password: document.querySelector("#password").value });
@@ -120,6 +133,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         await activarSesion(data.session);
         mensaje.textContent = "";
       } catch (error) { mensaje.textContent = error.message; }
+      finally {
+        boton.disabled = false;
+        boton.removeAttribute("aria-busy");
+        boton.querySelector("span").textContent = "Ingresar a VisualShelf";
+      }
     });
     document.querySelector("#recuperar").addEventListener("click", async () => {
       const email = document.querySelector("#email").value;
