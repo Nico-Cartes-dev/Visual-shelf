@@ -1,232 +1,217 @@
-# Walmart Computer Vision - Proyecto Capstone
+# VisualShelf — Detección de góndolas vacías con visión por computador
 
-## Descripcion del Proyecto
+Proyecto Capstone (APT122) · Ingeniería en Informática · Duoc UC
 
-### Problematica Abordada
+VisualShelf analiza fotos de góndolas de supermercado, detecta cada producto con un modelo YOLOv8, estima el **porcentaje de stock** de la góndola y avisa **"Reabastecer"** cuando baja del umbral crítico (30 % por defecto).
 
-En el entorno del retail y supermercados Walmart, la gestion manual de gondolas y la deteccion tardia de quiebres de stock representan perdidas de ventas y una deficiente experiencia de cliente. La deteccion manual de espacios vacios resulta lenta, costosa y dificil de escalar entre multiples salas y locales.
+<p align="center">
+  <img src="docs/img/app_resultado.jpg" width="90%" alt="Aplicación VisualShelf mostrando el análisis de una góndola">
+</p>
 
-### Objetivos
-
-* Objetivo General: Disenar e implementar una solucion automatizada basada en Inteligencia Artificial y Vision por Computador que analice imagenes de gondolas, determine la disponibilidad visual de productos y emita alertas cuando la disponibilidad sea inferior a un umbral critico (por ejemplo, menor al $30\%$).
-* Objetivos Especificos:
-  1. Detectar y segmentar repisas y productos en gondolas de exhibicion utilizando YOLOv8.
-  2. Determinar espacios libres entre productos aplicando filtros de separacion natural para identificar huecos y calcular el porcentaje de stock disponible.
-  3. Aplicar reglas tecnicas para enmascarar e ignorar zonas obstruidas u ofuscadas (personas, carros de compra, pilares o reflejos).
-  4. Evaluar el desempeno del sistema con metricas cuantitativas (IoU, mAP, precision, recall y tiempos de procesamiento).
-  5. Garantizar la reproducibilidad total del proyecto mediante una estructura de repositorio estandarizada y documentacion de ejecucion.
-
-### Funcionalidades Principales
-
-* Pipeline de Inferencia: Repisas (segmentacion) -> Productos (YOLOv8) -> Espacios libres entre productos -> Filtro de separacion natural -> Huecos -> Porcentaje de stock y alerta de reabastecimiento.
-* Preprocesamiento e Ingesta de Datos: Conversion automatica de formatos (COCO/VOC) a YOLO, descartando clases no relevantes como etiquetas de precio.
-* Integracion con Datasets Publicos y Propios: Procesamiento de datasets de Kaggle (Supermarket Shelves, Grocery Shelves) y fotos propias desde Roboflow (Proyecto Selfshelf).
-* API REST basada en FastAPI para la ejecucion de inferencias y entrega de resultados estructurados en formato JSON.
+<!-- GIF de la app funcionando: grabarlo y dejarlo en docs/img/demo.gif -->
+<!-- <p align="center"><img src="docs/img/demo.gif" width="90%" alt="Demo de VisualShelf"></p> -->
 
 ---
 
-## Estrategia y Justificacion Tecnica
+## Contenido
 
-### Tecnologias Utilizadas (Librerias Open Source)
-
-* Lenguaje de Programacion: Python 3.10+
-* Procesamiento de Vision por Computador: OpenCV, Pillow, NumPy, Albumentations
-* Framework de Deep Learning: PyTorch, Ultralytics YOLOv8
-* Datasets y Preprocesamiento: Roboflow API, KaggleHub
-* Servicio de Inferencia / API: FastAPI, Uvicorn
-* Entorno de Desarrollo y Persistencia: Google Colab con persistencia en Google Drive
-
-### Justificacion Tecnica
-
-* YOLOv8 y PyTorch: Seleccionados por su condicion Open Source, alto rendimiento en deteccion de objetos en tiempo real y solidez matematica para manejar variaciones de perspectiva, sombra e iluminacion en las tiendas.
-* Pipeline en Dos Etapas (Productos + Espacios Libres): La combinacion de deteccion de productos con un filtro de separacion natural permite calcular con alta precision los huecos reales en la gondola sin confundir separaciones estructurales.
-* FastAPI: Permite construir una interfaz asincrona de alta velocidad con validacion de datos automatica y documentacion OpenAPI estandar.
+- [Problemática](#problemática)
+- [Objetivos](#objetivos)
+- [Cómo funciona](#cómo-funciona)
+- [Resultados](#resultados)
+- [La aplicación](#la-aplicación)
+- [Instalación y ejecución](#instalación-y-ejecución)
+- [Estructura del repositorio](#estructura-del-repositorio)
+- [Estado del proyecto](#estado-del-proyecto)
+- [Equipo](#equipo)
 
 ---
 
-## Arquitectura de la Solucion
+## Problemática
+
+En el retail, revisar a mano qué góndolas se están quedando sin productos es lento, costoso y difícil de escalar entre salas y locales. Cuando la revisión llega tarde, el producto falta en la góndola aunque exista en bodega (quiebre de stock en sala), con pérdida de ventas y una peor experiencia para el cliente.
+
+## Objetivos
+
+**General:** diseñar e implementar una solución basada en inteligencia artificial y visión por computador que analice imágenes de góndolas, determine la disponibilidad visual de productos y emita alertas cuando sea inferior a un umbral crítico (por ejemplo, 30 %).
+
+**Específicos:**
+
+1. Detectar los productos y las repisas de la góndola usando YOLOv8.
+2. Determinar los espacios libres entre productos, con un filtro de separación natural, para identificar huecos y calcular el porcentaje de stock.
+3. Manejar zonas obstruidas o poco confiables (personas, carros, pilares o reflejos) para no generar alertas falsas.
+4. Evaluar el sistema con métricas cuantitativas (mAP, precisión, recall y tiempos de procesamiento).
+5. Garantizar la reproducibilidad del proyecto con un repositorio ordenado y documentación de ejecución.
+
+---
+
+## Cómo funciona
 
 ```text
-[ Captura de Imagen / Stream ]
-             │
-             ▼
-[ Preprocesamiento (OpenCV / Albumentations) ] ---> (Normalizacion, reduccion a 1280px y filtro de luz)
-             │
-             ▼
-[ Inferencia IA (YOLOv8) ]                   ---> (Deteccion y bounding boxes de productos)
-             │
-             ▼
-[ Analisis de Espacios Libres y Huecos ]     ---> (Filtro de separacion natural entre productos)
-             │
-             ▼
-[ Calculo de Disponibilidad y Alerta ]       ---> (Estimacion % de stock; alerta si es < 30%)
-             │
-             ▼
-[ API REST (FastAPI) ]                       ---> (Punto de contacto para integracion y reportes)
+Foto de la góndola
+      │
+      ▼
+Detector YOLOv8s (clase única "producto")  ──►  cajas de cada producto
+      │
+      ▼
+Filas de la góndola (RANSAC sobre la base de los productos)
+      │
+      ▼
+Huecos: espacio > 1,3 × ancho de los vecinos  +  verificación de textura
+      │
+      ▼
+% de stock por fila y por góndola
+      │
+      ▼
+Estado:  Stock adecuado  │  Reabastecer (< umbral)  │  Revisión manual
 ```
 
----
+- **Detector:** YOLOv8s entrenado con SKU-110K (1.500 imágenes) más los datasets de Kaggle `humansintheloop/supermarket-shelves-dataset` y `unidpro/grocery-shelves`, convertidos a formato YOLO con una sola clase `producto` (se descartan las etiquetas de precio). Confianza de detección: 0,35.
+- **Filas:** se obtienen de la posición de los productos detectados (RANSAC), sin un modelo de segmentación aparte.
+- **Separación natural:** un espacio solo cuenta como hueco si es más ancho que 1,3 veces sus productos vecinos y además no tiene textura de producto. Las filas vacías se infieren y también se verifican por textura.
+- **Revisión manual:** cuando el resultado no es confiable (foto ilegible, muy pocos productos, zonas dudosas), la foto no se marca como alerta, sino como "Revisión manual", para no dar falsas alarmas.
+- **Robustez:** el entrenamiento usa aumentación con fallas simuladas (reflejos, desenfoque, ruido, píxeles muertos, cambios de brillo y perspectiva).
 
-## Datasets Utilizados
-
-* Datasets Publicos de Kaggle:
-  - Supermarket Shelves Dataset (`humansintheloop/supermarket-shelves-dataset`)
-  - Grocery Shelves (`unidpro/grocery-shelves`)
-* Dataset Propio de Roboflow:
-  - Workspace: `luis-valenzuela-s-workspace`
-  - Proyecto: `selfshelf`
-* Preparacion de Datos:
-  1. Limpieza y Filtrado: Conversion de anotaciones a formato YOLO de una sola clase (`producto`), descartando etiquetas de precio (`price`, `price_tag`, `label`).
-  2. Aumentacion de Datos: Aplicada en el conjunto de entrenamiento para mejorar la robustez frente a reflejos y oclusiones.
-  3. Division del Dataset: $85\%$ Entrenamiento (`train`), $15\%$ Validacion (`val`).
-
----
-
-## Estado Actual de la Implementacion
-
-| Modulo / Componente              |    Estado    | % Avance | Observaciones y Evidencias                                                                   |
-| :------------------------------- | :-----------: | :------: | :------------------------------------------------------------------------------------------- |
-| Ingesta y Conversion de Datos    |   Terminado   |   100%   | Conversion COCO/VOC a YOLO y descarte de clases de precio completado.                        |
-| Notebook de Entrenamiento (V3.1) |   Terminado   |   100%   | Pipeline completo implementado en`deteccion_huecos_gondolas_V3.1.ipynb`.                   |
-| Detector de Productos (YOLOv8)   | En Desarrollo |   85%   | Modelo entrenado sobre datasets combinados; validacion sobre fotos propias.                  |
-| Calculo de Huecos y % Stock      |   Terminado   |   90%   | Algoritmo de separacion natural y calculo de disponibilidad funcional.                       |
-| Documentacion y Fase 1 / Fase 2  |   Terminado   |   100%   | Requerimientos, diagramas UML, historias de usuario, informes y diarioreflexion organizados. |
+<p align="center">
+  <img src="docs/img/deteccion_vinos.jpg" width="49%" alt="Detección en góndola de vinos">
+  <img src="docs/img/deteccion_jugos.jpg" width="49%" alt="Detección en góndola de jugos">
+</p>
+<p align="center">
+  <img src="docs/img/deteccion_salsas.jpg" width="49%" alt="Detección en góndola de salsas">
+  <img src="docs/img/deteccion_ketchup.jpg" width="49%" alt="Detección en góndola de ketchup">
+</p>
+<p align="center"><em>Fotos propias analizadas: cada caja es un producto detectado; el color indica la fila.</em></p>
 
 ---
 
-### Estructura de Carpetas y Organizacion del Codigo Fuente
+## Resultados
 
-Esta estructura corresponde exactamente a la organizacion del proyecto en el repositorio GitHub (`Visual-shelf`) y en las carpetas de Google Drive (`Fase 1` y `Fase 2`):
+**Detector (160 imágenes de validación):**
 
-```text
-Visual-shelf/
-├── README.md                             
-├── Fase 1/                               
-│   ├── Anexos/
-│   │   ├── Diseño/
-│   │   │   ├── Diagrama de arquitectura/
-│   │   │   │    ├── Arquitectura con colab.png
-│   │   │   │    └── Arquitectura con local.png     
-│   │   │   ├── Diagramas particulares por cada C.U_/
-│   │   │   │    └── (cada caso de uso esta dentro)casos_de_uso_walmart_capstone.drawio
-│   │   │   ├── Mockups/
-│   │   │   │    ├── Mockup-01.jpg
-│   │   │   │    ├── Mockup-02.jpg
-│   │   │   │    ├── Mockup-03.jpg
-│   │   │   │    └── Mockup-04.jpg
-│   │   │   ├── Diagrama general de Caso de Uso.xml
-│   │   │   ├── Lista de C.U. _ Historias de Usuario, Epicas, Sprint, etc.xlsx
-│   │   │   ├── Lista de requerimientos funcionales y no funcionales.xlsx
-│   │   │   └── Plantillas de C.U. por cada C.U_
-│   │   ├── Gestion/
-│   │   │   └── Actas de reunion/
-│   │   │   │    └── Acta_Reunion_1_Walmart_Chile.docx
-│   │   │   ├── Archivo README.docx
-│   │   │   ├── Carta Gantt.xlsx
-│   │   │   ├── Matriz RACI.xlsx
-│   │   │   └── Plan de riesgo.xlsx
-│   │   ├── Archivo README.docx
-│   │   ├── Carta Gantt.xlsx
-│   │   ├── Matriz RACI.xlsx
-│   │   └── Plan de riesgo.xlsx
-│   └── Documentos Administrativos/
-│        └── Fase 1/
-│            ├── Evidencias Grupales/
-│            │    ├── 1.4_APT122_FormativaFase1.docx
-│            │    ├── 1.5_GuiaEstudiante_Fase 1_Definicion Proyecto APT.docx
-│            │    ├── PLANILLA DE EVALUACIÓN FASE 1.xlsx
-│            │    └── Presentacion idea de proyecto.docx
-│            └── Evidencias Individuales/
-│                  ├── Cartes_nicolas_1.2_APT122_DiarioReflexionFase1.pdf
-│                  ├── Cartes_nicolas_1.3_APT122_AutoevaluacionFase1.docx
-│                  ├── Luengo_david_1.1_APT122_AutoevaluacionCompetenciasFase1.pdf
-│                  ├── Luengo_david_1.2_APT122_DiarioReflexionFase1.pdf
-│                  ├── Luengo_david_1.3_APT122_AutoevaluacionFase1.docx
-│                  ├── Saldias_Luis_1.1_APT122_AutoevaluacionCompetenciasFase1.pdf
-│                  ├── Saldias_Luis_1.2_APT122_DiarioReflexionFase1.pdf
-│                  ├── Saldias_Luis_1.3_APT122_AutoevaluacionFase1.docx
-│                  ├── cartes_nicolas_1.1_APT122_AutoevaluacionCompetenciasFase1.pdf
-│                  ├── flores_eric_1.1_APT122_AutoevaluacionCompetenciasFase1.pdf
-│                  ├── flores_eric_1.2_APT122_DiarioReflexionFase1.docx
-│                  └── flores_eric_1.3_APT122_AutoevaluacionFase1.docx         
-└── Fase 2/                               
-    ├── 2.4_GuiaEstudiante_Fase 2_DesarrolloProyecto APT.docx
-    ├── 2.4_GuiaEstudiante_Fase2_DesarrolloProyectoAPT(español).docx
-    ├── Cartes_Nicolas_2.1_APT122_DiarioReflexionFase2.docx
-    ├── Flores_Eric_2.1_APT122_DiarioReflexionFase2.docx
-    ├── Luengo_David_2.1_APT122_DiarioReflexionFase2.docx
-    ├── Saldias_Luis_2.1_APT122_DiarioReflexionFase2.docx
-    ├── Informe_APT_Fase2_tres_secciones_modificado.docx
-    └── modelos/
-        ├── Luis Saldias
-        │   └── deteccion_huecos_gondolas_V3.1.ipynb
-        └── Nicolas Cartes
-            ├── best.pt
-            └── shelf_monitor_uso_v3.ipynb
+| Métrica | Resultado |
+|---|---|
+| Precisión | 0,897 |
+| Recall | 0,860 |
+| mAP50 | 0,912 |
 
+**Sistema completo con 44 fotos propias de góndolas llenas:** 42 en "Stock adecuado", 2 en "Revisión manual" y **0 falsas alarmas**.
 
-```
+**Simulación de faltantes:** se borran productos de fotos reales y se comprueba que la ocupación baja y que aparece la alerta (84 % de las alertas detectadas en simulación).
 
-### Instrucciones para Instalar Dependencias, Configurar y Ejecutar la Aplicacion
+<p align="center">
+  <img src="docs/img/simulacion_faltantes.jpg" width="80%" alt="Foto original y la misma foto con 60 % de productos borrados">
+</p>
 
-1. Clonar el repositorio desde GitHub:
+**Plan de pruebas de la app:** 51 casos; en la primera ejecución pasaron 39, falló 1 y quedaron 11 pendientes.
+
+**Pendiente:** medir el error del % de stock y el acierto de la alerta con fotos reales de góndolas con poco stock.
+
+<details>
+<summary>Galería de fotos propias analizadas</summary>
+<p align="center"><img src="docs/img/galeria_fotos_propias.jpg" width="100%" alt="Galería de resultados del notebook"></p>
+</details>
+
+---
+
+## La aplicación
+
+La aplicación web está en [`Desarrollo/app`](Desarrollo/app):
+
+- Inicio de sesión con Supabase Auth y permisos por tienda (roles `admin` y `operador`).
+- Carga de hasta 30 fotos por análisis, por botón o arrastrando.
+- Visor con detecciones, zoom y vista original.
+- Panel con ocupación, estado, productos, huecos y filas.
+- Historial compartido por tienda, alertas, resumen por tienda y exportación a CSV.
+- Fotos guardadas en Storage privado de Supabase.
+- Reentrenamiento del modelo con fotos propias (`entrenar.py`).
+
+**Tecnologías:** Python 3.11, Ultralytics YOLOv8, PyTorch, OpenCV, NumPy, SciPy y Pillow. El servidor usa la biblioteca estándar de Python (`http.server`), sin frameworks. La interfaz está hecha en HTML, CSS y JavaScript sin dependencias. Supabase aporta Auth, PostgreSQL con RLS y Storage. Se puede ejecutar en local, en Docker o en Google Colab.
+
+---
+
+## Instalación y ejecución
 
 ```bash
 git clone https://github.com/Nico-Cartes-dev/Visual-shelf.git
-cd Visual-shelf
-```
-
-2. Crear y activar el entorno virtual de Python:
-
-```bash
+cd Visual-shelf/Desarrollo/app
 python -m venv venv
-
-# En Linux o macOS:
-source venv/bin/activate
-
-# En Windows:
-.\venv\Scripts\activate
+# Windows: .\venv\Scripts\activate   |   Linux/macOS: source venv/bin/activate
+python -m pip install -r requirements.txt
 ```
 
-3. Instalar las dependencias Open Source requeridas:
+Configura `SUPABASE_URL` y `SUPABASE_PUBLISHABLE_KEY` (ver `.env.example`). En Windows, `iniciar.ps1` las configura e inicia la app:
+
+```powershell
+./iniciar.ps1
+```
+
+Luego abre http://127.0.0.1:7860. `best.pt` y `parametros_v4.json` deben estar junto a `app.py`; también puedes indicar otro modelo:
 
 ```bash
-pip install ultralytics roboflow albumentations kagglehub opencv-python torch pillow matplotlib
+python app.py --modelo ruta/a/best.pt --puerto 7860
 ```
 
-4. Ejecucion del Notebook de Entrenamiento e Inferencia:
-   Abrir y ejecutar el notebook `Fase 2/modelos/deteccion_huecos_gondolas_V3.1.ipynb` en Google Colab o Jupyter Lab.
+Más información:
 
-* Configurar la clave API de Roboflow en las variables de entorno o Secrets de Colab (`ROBOFLOW_API_KEY`).
-* El notebook realiza automaticamente la descarga de datasets desde Kaggle, la restauracion de cache en Google Drive, la conversion a formato YOLO y la ejecucion del pipeline de deteccion.
+- [`CENTRALIZACION.md`](Desarrollo/app/CENTRALIZACION.md): usuarios, permisos, Docker y publicación.
+- [`ENTRENAMIENTO.md`](Desarrollo/app/ENTRENAMIENTO.md): reentrenar el modelo con fotos propias.
 
-5. Semilla de Reproducibilidad:
-   El codigo fija explicitamente las semillas de aleatoriedad al inicio del pipeline:
+Pruebas:
 
-```python
-SEED = 42
-random.seed(SEED)
-np.random.seed(SEED)
-torch.manual_seed(SEED)
+```bash
+python -m unittest test_central test_entrenar -v
+node test_frontend.cjs
+```
+
+**Reproducibilidad:** el notebook fija la semilla (`SEED = 42`) en `random`, NumPy y PyTorch, y respalda datos y pesos en Google Drive.
+
+---
+
+## Estructura del repositorio
+
+```text
+Visual-shelf/
+├── README.md
+├── docs/img/                   Imágenes de este README
+├── Desarrollo/
+│   ├── app/                    Aplicación VisualShelf
+│   │   ├── app.py              Servidor y API
+│   │   ├── motor.py            Detección y cálculo de stock (notebook V4.1b)
+│   │   ├── central.py          Conexión con Supabase (Auth, PostgreSQL, Storage)
+│   │   ├── static/             Interfaz web
+│   │   ├── supabase/           Esquema SQL y pruebas de permisos
+│   │   ├── entrenar.py         Reentrenamiento con fotos propias
+│   │   ├── best.pt             Pesos del modelo
+│   │   ├── parametros_v4.json  Parámetros calibrados
+│   │   ├── Dockerfile
+│   │   └── lanzar_app_colab.ipynb
+│   └── requirements.txt
+├── Fase 1/                     Diseño (casos de uso, mockups, arquitectura) y gestión (Gantt, RACI, riesgos)
+└── Fase 2/                     Informes, diarios de reflexión y notebooks de modelos
 ```
 
 ---
 
-## Analisis de Resultados Preliminares (20 Casos)
+## Estado del proyecto
 
-* Evaluacion sobre Fotos Propias (Roboflow `selfshelf`): Evaluacion del modelo sobre 44 fotografias propias capturadas en gondolas reales.
-* Mejores Casos: Deteccion precisa de productos individuales y calculo exacto del porcentaje de disponibilidad en gondolas bien iluminadas.
-* Peores Casos / Desafios: Dificultades observadas en productos con reflejos intensos o zonas de sombras profundas. Se aplican filtros de separacion natural y aumentacion de datos para mitigar estos errores.
+| Módulo | Estado |
+|---|---|
+| Ingesta y conversión de datos a YOLO | Terminado |
+| Detector de productos (YOLOv8s + SKU-110K) | Terminado: P 0,90 · R 0,86 · mAP50 0,91 |
+| Cálculo de huecos, % de stock y alerta | Terminado |
+| Aplicación web con login e historial compartido | Terminado; falta elegir dónde publicarla |
+| Manual de usuario y plan de pruebas | Terminado; pruebas en curso |
+| Validación con fotos reales de bajo stock | Pendiente |
 
 ---
 
-## Equipo y Supervision
+## Equipo
 
-* Integrantes del Equipo:
-  - Nicolas Cartes (`ni.cartesg@duocuc.cl`)
-  - Eric Flores (`eri.flores@duocuc.cl`)
-  - David Luengo (`da.luengo@duocuc.cl`)
-  - Luis Saldias (`lu.saldiasv@duocuc.cl`)
-* Repositorio GitHub: https://github.com/Nico-Cartes-dev/Visual-shelf
-* Proyecto: Walmart Computer Vision - Capstone (APT122)
-* Supervisores: Arturo Vargas (`arvargas@profesor.duoc.cl`) / Jose Larrain
+| Integrante | Correo |
+|---|---|
+| Nicolás Cartes | ni.cartesg@duocuc.cl |
+| Eric Flores | eri.flores@duocuc.cl |
+| David Luengo | da.luengo@duocuc.cl |
+| Luis Saldias | lu.saldiasv@duocuc.cl |
+
+**Supervisores:** Arturo Vargas (arvargas@profesor.duoc.cl) y José Larraín.
