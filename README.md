@@ -171,23 +171,80 @@ node test_frontend.cjs
 
 ```text
 Visual-shelf/
-├── README.md
-├── docs/img/                   Imágenes de este README
-├── Desarrollo/
-│   ├── app/                    Aplicación VisualShelf
-│   │   ├── app.py              Servidor y API
-│   │   ├── motor.py            Detección y cálculo de stock (notebook V4.1b)
-│   │   ├── central.py          Conexión con Supabase (Auth, PostgreSQL, Storage)
-│   │   ├── static/             Interfaz web
-│   │   ├── supabase/           Esquema SQL y pruebas de permisos
-│   │   ├── entrenar.py         Reentrenamiento con fotos propias
-│   │   ├── best.pt             Pesos del modelo
-│   │   ├── parametros_v4.json  Parámetros calibrados
-│   │   ├── Dockerfile
-│   │   └── lanzar_app_colab.ipynb
-│   └── requirements.txt
-├── Fase 1/                     Diseño (casos de uso, mockups, arquitectura) y gestión (Gantt, RACI, riesgos)
-└── Fase 2/                     Informes, diarios de reflexión y notebooks de modelos
+├── README.md                           # Documentación principal del proyecto
+├── docs/                               # Recursos gráficos y documentación
+│   └── img/                            # Capturas de pantalla y diagramas del README
+├── Desarrollo/                         # Entorno de desarrollo, scripts y aplicación web
+│   ├── app/                            # Aplicación web completa de VisualShelf
+│   │   ├── static/                     # Frontend (HTML5, CSS3, JavaScript vanilla)
+│   │   │   ├── app.js                  # Lógica del cliente, visor de imágenes y métricas
+│   │   │   ├── central.js              # Integración con Supabase (sesión y persistencia)
+│   │   │   ├── index.html              # Interfaz de usuario principal
+│   │   │   └── styles.css              # Estilos visuales de la aplicación
+│   │   ├── supabase/                   # Configuración y base de datos relacional
+│   │   │   ├── schema.sql              # Esquema de tablas, vistas y políticas de seguridad (RLS)
+│   │   │   └── test_permisos.sql       # Pruebas y validaciones de permisos de usuarios
+│   │   ├── .dockerignore               # Exclusiones para la imagen Docker
+│   │   ├── .env.example                # Variables de entorno de ejemplo
+│   │   ├── app.py                      # Servidor HTTP y API REST del sistema
+│   │   ├── best.pt                     # Pesos entrenados del modelo YOLOv8
+│   │   ├── central.py                  # Capa de comunicación con Supabase (Auth, DB, Storage)
+│   │   ├── CENTRALIZACION.md           # Guía de roles, permisos, configuración y despliegue
+│   │   ├── Dockerfile                  # Definición de contenedor para despliegue
+│   │   ├── ENTRENAMIENTO.md            # Guía detallada para reentrenamiento de modelos
+│   │   ├── entrenar.py                 # Pipeline de reentrenamiento con datos locales
+│   │   ├── iniciar.ps1                 # Script en PowerShell para arranque rápido en Windows
+│   │   ├── lanzar_app_colab.ipynb      # Notebook para ejecución en Google Colab
+│   │   ├── motor.py                    # Motor de inferencia (YOLOv8, RANSAC y análisis de stock)
+│   │   ├── parametros_v4.json          # Parámetros calibrados para la detección
+│   │   ├── README.md                   # Documentación específica de la aplicación
+│   │   ├── requirements.txt            # Dependencias requeridas por la aplicación
+│   │   ├── test_central.py             # Pruebas unitarias del módulo de Supabase
+│   │   ├── test_entrenar.py            # Pruebas unitarias del script de entrenamiento
+│   │   └── test_frontend.cjs           # Pruebas automatizadas de la interfaz web
+│   ├── ENTRENAMIENTO.md                # Guía de entrenamiento en raíz de desarrollo
+│   ├── entrenar.py                     # Script de entrenamiento en raíz de desarrollo
+│   ├── readme.md.txt                   # Documento de texto auxiliar
+│   ├── requirements.txt                # Requisitos de dependencias del entorno de desarrollo
+│   └── test_entrenar.py                # Pruebas unitarias de entrenamiento
+├── Fase 1/                             # Documentación, diseño y gestión inicial del proyecto
+│   ├── Anexos/
+│   │   ├── Diseño/                     # Especificaciones técnicas y de diseño
+│   │   │   ├── Diagrama de arquitectura/   # Diagramas de flujo y arquitectura (local y Colab)
+│   │   │   ├── Diagramas particulares por cada C.U_/  # Casos de uso detallados (.drawio)
+│   │   │   ├── Mockups/                # Prototipos visuales de las pantallas
+│   │   │   ├── Diagrama general de Caso de Uso.xml
+│   │   │   ├── Lista de C.U. _ Historias de Usuario, Epicas, Sprint, etc.xlsx
+│   │   │   ├── Lista de requerimientos funcionales y no funcionales.xlsx
+│   │   │   └── Plantillas de C.U. por cada C.U_
+│   │   └── Gestion/                    # Planificación y seguimiento del proyecto
+│   │       ├── Actas de reunion/       # Minutas y acuerdos de reuniones con contrapartes
+│   │       ├── Archivo README.docx     # Documentación complementaria de gestión
+│   │       ├── Carta Gantt.xlsx        # Cronograma de actividades y entregables
+│   │       ├── Matriz RACI.xlsx        # Matriz de roles y responsabilidades del equipo
+│   │       └── Plan de riesgo.xlsx     # Identificación y mitigación de riesgos
+│   └── Documentos Administrativos/
+│       └── FASE 1/
+│           ├── Evidencias Grupales/    # Entregas formales de equipo, pautas y presentaciones
+│           └── Evidencias Individuales/# Autoevaluaciones y diarios de reflexión de cada integrante
+└── Fase 2/                             # Desarrollo técnico, experimentación, informes y evidencias
+    ├── Evidencia proyecto/             # Evidencias del sistema y entregables
+    │   ├── Evidencias de documentacion/    # Manual de usuario y Plan de pruebas (PDF)
+    │   ├── Evidencias de sistema Aplicacion/
+    │   └── Presentacion.docx           # Presentación ejecutiva de avance
+    ├── Evidencias Grupales/            # Guías del estudiante e informe final de la fase
+    │   ├── 2.4_GuiaEstudiante_Fase 2_DesarrolloProyecto APT.docx
+    │   ├── 2.4_GuiaEstudiante_Fase2_DesarrolloProyectoAPT(español).docx
+    │   └── 2.6_GuiaEstudiante_Fase 2_Informe Final Proyecto APT (español).docx
+    ├── Evidencias Individuales/        # Diarios de reflexión individuales de la fase
+    │   ├── Cartes_Nicolas_2.1_APT122_DiarioReflexionFase2.docx
+    │   ├── Flores_Eric_2.1_APT122_DiarioReflexionFase2.docx
+    │   ├── Luengo_David_2.1_APT122_DiarioReflexionFase2.docx
+    │   └── Saldias_Luis_2.1_APT122_DiarioReflexionFase2.docx
+    ├── modelos/                        # Modelos y experimentación en visión por computador
+    │   ├── Luis Saldias/               # Detección de huecos en góndolas v3.1 (.ipynb)
+    │   └── Nicolas Cartes/             # Pesos entrenados (best.pt) y notebook de prueba (.ipynb)
+    └── Informe_APT_Fase2_tres_secciones_modificado.docx  # Informe técnico consolidado de Fase 2
 ```
 
 ---
