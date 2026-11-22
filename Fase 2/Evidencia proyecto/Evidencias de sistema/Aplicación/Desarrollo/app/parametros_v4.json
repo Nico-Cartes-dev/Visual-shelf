@@ -1,0 +1,22 @@
+{
+  "version": "v4",
+  "datos": "v4_sku1500",
+  "conf_det": 0.35,
+  "usar_tiles": false,
+  "usar_tta": false,
+  "conf_tiles": 0.5,
+  "tiles_adaptativo": true,
+  "imgsz_det": 1024,
+  "iou_det": 0.55,
+  "max_det": 1500,
+  "zona": "detecciones",
+  "seg_iou": 0.69661962516364,
+  "zona_det_iou": 0.6996497490081259,
+  "umbral_stock": 0.3,
+  "k_hueco": 1.3,
+  "tex_ratio_max": 0.65,
+  "ratio_fila_vacia": 1.7,
+  "bordes": false,
+  "pesos_det": "/content/drive/MyDrive/proyecto_gondolas/runs/productos_v4_sku1500/weights/best.pt",
+  "pesos_seg": "/content/drive/MyDrive/proyecto_gondolas/runs/gondolas_seg_v4/weights/best.pt"
+}

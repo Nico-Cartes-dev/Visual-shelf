@@ -1,0 +1,4 @@
+.env
+__pycache__/
+entrenamientos/
+node_modules/

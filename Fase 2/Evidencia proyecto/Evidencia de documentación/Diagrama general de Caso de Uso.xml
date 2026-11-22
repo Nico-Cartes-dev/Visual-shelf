@@ -1,0 +1,110 @@
+<mxfile host="app.diagrams.net" agent="ChatGPT" compressed="false">
+  <diagram id="uc-general-walmart-v2" name="Casos de Uso General">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1700" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=26;fontStyle=1;fontColor=#1F2937;" value="Diagrama General de Casos de Uso — UML" vertex="1">
+          <mxGeometry height="42" width="850" x="430" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=15;fontColor=#4B5563;" value="Sistema de IA para detección de espacios vacíos en góndolas — relaciones &amp;lt;&amp;lt;include&amp;gt;&amp;gt; / &amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" vertex="1">
+          <mxGeometry height="30" width="850" x="430" y="62" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_user" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontSize=14;fontStyle=1;fontColor=#111827;" value="Usuario / Analista" vertex="1">
+          <mxGeometry height="145" width="95" y="166.5" as="geometry" />
+        </mxCell>
+        <mxCell id="system" parent="1" style="swimlane;html=1;startSize=42;rounded=0;fontStyle=1;fontSize=15;horizontal=1;fillColor=#F8FAFC;strokeColor=#475569;strokeWidth=2;fontColor=#0F172A;" value="Sistema de Detección de Espacios Vacíos en Góndolas" vertex="1">
+          <mxGeometry height="810" width="1280" x="140" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_load" parent="system" style="ellipse;whiteSpace=wrap;html=1;fontSize=13;fillColor=#E8F0FE;strokeColor=#3B82F6;strokeWidth=1.5;fontColor=#111827;" value="&lt;b&gt;Cargar imagen de góndola&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot;&gt;Entrada: imagen real de local&lt;/font&gt;" vertex="1">
+          <mxGeometry height="78" width="275" x="75" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_analyze" parent="system" style="ellipse;whiteSpace=wrap;html=1;fontSize=13;fillColor=#E8F0FE;strokeColor=#3B82F6;strokeWidth=1.5;fontColor=#111827;" value="&lt;b&gt;Analizar góndola&lt;/b&gt;&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="78" width="275" x="75" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="E5-jRo7E7Ki-G0tNcwHY-2" edge="1" parent="system" source="uc_percent" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;dashed=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="598" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uc_percent" parent="system" style="ellipse;whiteSpace=wrap;html=1;fontSize=13;fillColor=#FFFFFF;strokeColor=#64748B;strokeWidth=1.3;fontColor=#111827;" value="&lt;b&gt;Calcular % / volumen de espacio libre&lt;/b&gt;&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="305" x="445" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_view" parent="system" style="ellipse;whiteSpace=wrap;html=1;fontSize=13;fillColor=#E8F0FE;strokeColor=#3B82F6;strokeWidth=1.5;fontColor=#111827;" value="&lt;b&gt;Visualizar resultados&lt;/b&gt;&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="76" width="275" x="460" y="406" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_persp" parent="system" style="ellipse;whiteSpace=wrap;html=1;fontSize=13;fillColor=#FFFFFF;strokeColor=#64748B;strokeWidth=1.3;fontColor=#111827;" value="&lt;b&gt;Preprocesar / corregir perspectiva&lt;/b&gt;&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="78" width="305" x="60" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_empty" parent="system" style="ellipse;whiteSpace=wrap;html=1;fontSize=13;fillColor=#FFFFFF;strokeColor=#64748B;strokeWidth=1.3;fontColor=#111827;" value="&lt;b&gt;Detectar espacios vacíos&lt;/b&gt;&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="78" width="305" x="60" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="E5-jRo7E7Ki-G0tNcwHY-3" edge="1" parent="system" source="uc_cfg_alert" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;" target="uc_view">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_cfg_alert" parent="system" style="ellipse;whiteSpace=wrap;html=1;fontSize=13;fillColor=#E8F0FE;strokeColor=#3B82F6;strokeWidth=1.5;fontColor=#111827;" value="&lt;b&gt;Configurar umbral de alerta&lt;/b&gt;&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="78" width="275" x="460" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_real_struct" parent="system" style="ellipse;whiteSpace=wrap;html=1;fontSize=13;fillColor=#FFFFFF;strokeColor=#64748B;strokeWidth=1.3;fontColor=#111827;" value="&lt;b&gt;Distinguir espacio vacío real vs. estructural&lt;/b&gt;&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="82" width="305" x="60" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_report" parent="system" style="ellipse;whiteSpace=wrap;html=1;fontSize=13;fillColor=#E7F6E7;strokeColor=#4F8A4F;strokeWidth=1.3;fontColor=#111827;" value="&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;b&gt;Generar reporte de performance y mapa de errores&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="88" width="185" x="505" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="uml_legend" parent="system" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#94A3B8;fontSize=11;fontColor=#334155;align=left;verticalAlign=top;spacing=8;" value="&lt;b&gt;Convenciones UML&lt;/b&gt;&lt;br&gt;&amp;lt;&amp;lt;include&amp;gt;&amp;gt; = comportamiento obligatorio reutilizado&lt;br&gt;&amp;lt;&amp;lt;extend&amp;gt;&amp;gt; = comportamiento opcional/condicional&lt;br&gt;Actor = interacción externa con el sistema" vertex="1">
+          <mxGeometry height="105" width="350" x="850" y="301" as="geometry" />
+        </mxCell>
+        <mxCell id="note_analyze_scope" parent="system" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=12;fontColor=#5B4A00;align=left;verticalAlign=top;spacing=8;" value="&lt;b&gt;Nota — Alcance de «Analizar góndola»&lt;/b&gt;&lt;br&gt;Este caso de uso &lt;b&gt;aglomera las verificaciones necesarias para el análisis de la góndola&lt;/b&gt;, incluyendo el análisis del &lt;b&gt;diámetro&lt;/b&gt; y/o de la &lt;b&gt;profundidad&lt;/b&gt; de la góndola, cuando dicha información sea necesaria para el análisis.&lt;br&gt;&lt;br&gt;&lt;b&gt;No son casos de uso independientes en este diagrama:&lt;/b&gt; forman parte del alcance de «Analizar góndola»." vertex="1">
+          <mxGeometry height="150" width="350" x="422.5" y="64" as="geometry" />
+        </mxCell>
+        <mxCell id="note_link_analyze" edge="1" parent="system" source="note_analyze_scope" style="dashed=1;endArrow=none;strokeColor=#D6B656;html=1;" target="uc_analyze">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="config_note" parent="system" style="shape=note;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#3B82F6;fontSize=11;fontColor=#1E3A8A;align=left;verticalAlign=top;spacing=6;" value="Configuración independiente&lt;br&gt;Se realiza cuando el usuario define el umbral; no se modela como &amp;lt;&amp;lt;include&amp;gt;&amp;gt; de cada análisis." vertex="1">
+          <mxGeometry height="90" width="360" x="845" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="E5-jRo7E7Ki-G0tNcwHY-1" edge="1" parent="system" source="uc_real_struct" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.533;entryY=1.006;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;" target="uc_percent">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="212.5" y="850" />
+              <mxPoint x="607.6" y="850" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E5-jRo7E7Ki-G0tNcwHY-5" edge="1" parent="system" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="690" y="211.5" />
+            </Array>
+            <mxPoint x="690.0000000000027" y="323" as="sourcePoint" />
+            <mxPoint x="1320" y="211.50000000000023" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sec_oper" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=12;fontStyle=1;fontColor=#64748B;" value="OPERACIÓN" vertex="1">
+          <mxGeometry height="24" width="130" x="245" y="168" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_include_load_analyze" edge="1" parent="1" source="uc_load" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=open;endFill=0;strokeWidth=1.5;fontSize=12;fontStyle=1;" target="uc_analyze" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_extend_persp_analyze" edge="1" parent="1" source="uc_persp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=open;endFill=0;strokeWidth=1.5;fontSize=12;fontStyle=1;" target="uc_analyze" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_include_analyze_empty" edge="1" parent="1" source="uc_analyze" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=open;endFill=0;strokeWidth=1.5;fontSize=12;fontStyle=1;" target="uc_empty" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_include_empty_struct" edge="1" parent="1" source="uc_empty" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=open;endFill=0;strokeWidth=1.5;fontSize=12;fontStyle=1;" target="uc_real_struct" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_extend_report" edge="1" parent="1" source="uc_report" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=open;endFill=0;strokeWidth=1.5;fontSize=12;fontStyle=1;" target="uc_view" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_user_load" edge="1" parent="1" source="actor_user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeWidth=1.5;fontSize=12;fontStyle=1;" target="uc_load" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E5-jRo7E7Ki-G0tNcwHY-4" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontSize=14;fontStyle=1;fontColor=#111827;" value="Usuario / Analista" vertex="1">
+          <mxGeometry height="145" width="95" x="1460" y="260" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
