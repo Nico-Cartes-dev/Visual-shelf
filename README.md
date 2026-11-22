@@ -186,6 +186,7 @@ Visual-shelf/
 │   │   │   └── test_permisos.sql       # Pruebas y validaciones de permisos de usuarios
 │   │   ├── .dockerignore               # Exclusiones para la imagen Docker
 │   │   ├── .env.example                # Variables de entorno de ejemplo
+│   │   ├── .gitignore                  # Reglas de exclusión de git de la app
 │   │   ├── app.py                      # Servidor HTTP y API REST del sistema
 │   │   ├── best.pt                     # Pesos entrenados del modelo YOLOv8
 │   │   ├── central.py                  # Capa de comunicación con Supabase (Auth, DB, Storage)
@@ -228,15 +229,23 @@ Visual-shelf/
 │           ├── Evidencias Grupales/    # Entregas formales de equipo, pautas y presentaciones
 │           └── Evidencias Individuales/# Autoevaluaciones y diarios de reflexión de cada integrante
 └── Fase 2/                             # Desarrollo técnico, experimentación, informes y evidencias
-    ├── Evidencia proyecto/             # Evidencias del sistema y entregables
-    │   ├── Evidencias de documentacion/    # Manual de usuario y Plan de pruebas (PDF)
-    │   ├── Evidencias de sistema Aplicacion/
-    │   └── Presentacion.docx           # Presentación ejecutiva de avance
+    ├── Evidencia proyecto/             # Entregables técnicos, instructivos, videos y anexos
+    │   ├── Anexos/                     # Documentación de apoyo de la fase
+    │   │   ├── Instructivo plan de instalación/  # Instructivo y plan de instalación (PDF)
+    │   │   ├── Manual de usuario/                # Manual de usuario VisualShelf (PDF)
+    │   │   ├── Plan de pruebas/                  # Plan de pruebas del sistema (PDF)
+    │   │   └── Carta Gantt.xlsx                  # Planificación y cronograma
+    │   ├── Evidencia de documentación/ # Diseños, casos de uso, mockups y diagramas de arquitectura
+    │   ├── Evidencias de sistema/      # Código fuente y archivos ejecutables de la fase
+    │   │   └── Aplicación/             # Código fuente de respaldo y copia comprimida (.zip)
+    │   ├── Presentación Proyecto/      # Diapositivas y presentación ejecutiva (Presentacion.docx)
+    │   ├── Video tutorial/             # Demostración en video de la aplicación (visualshelf.mp4)
+    │   └── Manual instructivo de uso de la aplicación.pdf
     ├── Evidencias Grupales/            # Guías del estudiante e informe final de la fase
     │   ├── 2.4_GuiaEstudiante_Fase 2_DesarrolloProyecto APT.docx
     │   ├── 2.4_GuiaEstudiante_Fase2_DesarrolloProyectoAPT(español).docx
     │   └── 2.6_GuiaEstudiante_Fase 2_Informe Final Proyecto APT (español).docx
-    ├── Evidencias Individuales/        # Diarios de reflexión individuales de la fase
+    ├── Evidencias Individuales/        # Diarios de reflexión individuales de cada integrante
     │   ├── Cartes_Nicolas_2.1_APT122_DiarioReflexionFase2.docx
     │   ├── Flores_Eric_2.1_APT122_DiarioReflexionFase2.docx
     │   ├── Luengo_David_2.1_APT122_DiarioReflexionFase2.docx
